@@ -7,11 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import pl.sda.javafxweather.model.WeatherService;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -35,6 +38,9 @@ public class RootController implements Initializable {
     @FXML
     private Hyperlink hyperlink;
 
+    @FXML
+    private ImageView image;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             city.setText("e.g. New_York");
@@ -47,6 +53,7 @@ public class RootController implements Initializable {
 
         WeatherService weatherService = new WeatherService("http://api.apixu.com/v1/current.json","e73bd5fd85ca4d8881d90312191002");
         try {
+
             weatherService.getCityWeather(scity);
             float t = weatherService.getCityWeather(scity).getCurrent().getTemp_c();
             float s = weatherService.getCityWeather(scity).getCurrent().getFeelslike_c();
@@ -54,6 +61,14 @@ public class RootController implements Initializable {
             String sensedtemp = String.valueOf(s);
             realtemperature.setText(realtemp);
             sensedtemperature.setText(sensedtemp);
+             // System.out.println(weatherService.getCityWeather(scity).getCurrent().getCondition().getIcon());
+            Image im = new Image("http:"+weatherService.getCityWeather(scity).getCurrent().getCondition().getIcon());
+            //Image im = new Image(new File("C:\\temp\\x.png").toURI().toURL().toExternalForm());
+            //image.setFitHeight(64);
+            //image.setFitWidth(64);
+            image.setImage(im);
+            //image.setImage();
+
         } catch (Exception e) {
             city.setText("no data in the apixu database");
             realtemperature.setText("");

@@ -7,10 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+   //kazdy projekt FX musi rozszerzac klase Application !!
+    // i overrridowac start ...
 
     public static void main(String[] args) {
         launch();
-	// write your code here
+	// odpala cala aplikacje fxowoa , metoda start jest odpalana przez launch ..
     }
 
     //definiujemy stage, plik FXML uprzednio wrzucacmy do resources
